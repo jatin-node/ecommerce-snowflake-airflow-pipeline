@@ -1,0 +1,27 @@
+# Secrets & Environment Variables
+.env
+.env.*
+
+# Airflow Runtime Files
+airflow/logs/
+airflow/airflow.db
+airflow/airflow.cfg
+
+# Python Cache (DAG parsing)
+__pycache__/
+*.pyc
+
+# OS / Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Temporary & Log Files
+*.log
+*.tmp
+
+# Data Files (not stored in Git)
+data/
+*.csv
+*.parquet
