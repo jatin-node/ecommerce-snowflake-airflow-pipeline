@@ -227,27 +227,7 @@ This project uses `INSERT INTO ... SELECT ... FROM @stage` for:
 
 ---
 
-## 🔄 Airflow DAG Workflow
-
-### DAG Configuration
-
-- **DAG ID**: `ecommerce_snowflake_batch_etl`
-- **Schedule**: Daily at midnight UTC (`@daily`)
-- **Start Date**: 2024-01-01
-- **Catchup**: Disabled (only processes latest data)
-
-### Task Dependencies
-
-```python
-# Parallel loading of dimensions and facts
-load_staging_dims = [load_users, load_items]
-load_staging_facts = [load_orders, load_order_items]
-
-# Sequential validation and analytics loading
-load_staging_dims + load_staging_facts >> validate_staging >> load_analytics >> update_control
-```
-
-### Task Breakdown
+### 🔄 AirFlow Task Breakdown
 
 | Task                    | Description                                              | SQL File                         |
 |-------------------------|----------------------------------------------------------|----------------------------------|
