@@ -25,13 +25,13 @@ This project demonstrates a **modern analytics architecture** for batch data pro
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                         Data Flow                                │
+│                         Data Flow                               │
 └─────────────────────────────────────────────────────────────────┘
 
    S3 (Gold Layer)                 Snowflake Data Warehouse
    ┌──────────────┐                ┌──────────────────────────┐
    │ Parquet Files│                │   External Stages        │
-   │  - users/    │  ─────────────▶│   - users_stage         │
+   │  - users/    │  ─────────────▶│   - users_stage          │
    │  - items/    │                │   - items_stage          │
    │  - orders/   │                │   - orders_stage         │
    │  - order_    │                │   - order_items_stage    │
