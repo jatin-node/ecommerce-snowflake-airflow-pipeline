@@ -21,43 +21,10 @@ This project demonstrates a **modern analytics architecture** for batch data pro
 
 ---
 
-## 🧱 Architecture Overview
+## 🧱 Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                         Data Flow                               │
-└─────────────────────────────────────────────────────────────────┘
+![Architecture](docs/architecture.png)
 
-   S3 (Gold Layer)                 Snowflake Data Warehouse
-   ┌──────────────┐                ┌──────────────────────────┐
-   │ Parquet Files│                │   External Stages        │
-   │  - users/    │  ─────────────▶│   - users_stage          │
-   │  - items/    │                │   - items_stage          │
-   │  - orders/   │                │   - orders_stage         │
-   │  - order_    │                │   - order_items_stage    │
-   │    items/    │                └──────────┬───────────────┘
-   └──────────────┘                           │
-                                              ▼
-                                   ┌─────────────────────┐
-                                   │  Staging Schema     │
-                                   │  - stg_dim_users    │
-                                   │  - stg_dim_items    │
-                                   │  - stg_fact_orders  │
-                                   │  - stg_fact_order_  │
-                                   │    items            │
-                                   └──────────┬──────────┘
-                                              │
-                                              ▼
-                                   ┌─────────────────────┐
-                                   │  Analytics Schema   │
-                                   │  Dimensions:        │
-                                   │  - dim_users        │
-                                   │  - dim_items        │
-                                   │  Facts:             │
-                                   │  - fact_orders      │
-                                   │  - fact_order_items │
-                                   └─────────────────────┘
-```
 
 
 ## 🛠️ Tech Stack
@@ -293,6 +260,27 @@ This project uses `INSERT INTO ... SELECT ... FROM @stage` for:
 - **View DAG runs**: Airflow UI → DAGs → `ecommerce_snowflake_batch_etl`
 - **Check task logs**: Click on individual tasks to view SQL execution logs
 - **Set up alerts**: Configure email/Slack notifications for task failures
+
+---
+
+## 🔍 Exploratory Analysis (SQL)
+
+In addition to the ETL pipeline, this project includes a set of **read-only exploratory SQL queries**
+that demonstrate how the analytics tables can answer common e-commerce business questions.
+
+The analysis covers:
+- Overall revenue and order volume
+- Daily revenue trends
+- Top customers by total spend
+- Best-selling products by revenue
+- Order status distribution
+- Customers with no orders
+- Revenue contribution by product category
+
+These queries are **not part of the Airflow DAGs** and are intended to showcase
+how the warehouse supports downstream analytics and decision-making.
+
+📄 Location: `sql/analysis/eda_business_questions.sql`  
 
 ---
 
